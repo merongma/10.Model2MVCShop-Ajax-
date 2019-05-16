@@ -30,8 +30,9 @@ $(function() {
 		self.location ="/purchase/getPurchase?tranNo="+$(this).children("input").val();
 	});
 	
-	$(".ct_list_pop td:nth-child(11)" ).on("click",function() {
-		//alert( "D" );
+	$(".ct_list_pop td:nth-child(11):contains('¹°°ÇµµÂø')" ).on("click",function() {
+		//alert( $(this).children("input").val() );
+		var tranNo =$(this).children("input").val().trim();
 		self.location="/purchase/updateTranCode?tranNo="+$(this).children("input").val()+"&tranCode=3";
 	});
 	
@@ -40,6 +41,7 @@ $(function() {
 $( ".ct_list_pop td:nth-child(1)" ).css("color" , "green");
 $( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
 $( ".ct_list_pop td:contains('¹°°ÇµµÂø')" ).css("color" , "blue");
+$( ".ct_list_pop td:nth-child(9)" ).css("color" , "red");
 
 $("h7:first").css("color" , "green");
 $("h7:last").css("color" , "red");
@@ -125,7 +127,7 @@ $(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
 		<td align="left" >
 				<c:if test="${! empty purchase.tranCode && purchase.tranCode=='2  '}">
 				  <input type="hidden" name="tranNo"  value="${purchase.tranNo }" />
-				¹°°ÇµµÂø
+				<h8>¹°°ÇµµÂø</h8>
 				</c:if>
 		</td>
 	</tr>

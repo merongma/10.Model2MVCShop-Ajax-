@@ -91,12 +91,12 @@ public class UserRestController {
 	public Map checkDuplication(@RequestBody User user) throws Exception {
 
 		System.out.println("/user/json/checkDuplication : POST");
-		
-		System.out.println("user값 확인 : "+user);
-		
+
+		System.out.println("user값 확인 : " + user);
+
 		boolean result = userService.checkDuplication(user.getUserId());
-		
-		System.out.println("중복체크 값입니다!"+result);
+
+		System.out.println("중복체크 값입니다!" + result);
 
 		Map map = new HashMap();
 		map.put("result", result);

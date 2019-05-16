@@ -105,7 +105,7 @@ public class ProductController {
 		cookie.setMaxAge(-1);
 		cookie.setPath("/");
 
-		System.out.println("쿠키값 확인 " + cookie.getValue());
+		// System.out.println("쿠키값 확인 " + cookie.getValue());
 		response.addCookie(cookie);
 
 		System.out.println("menu값" + menu);
@@ -133,9 +133,16 @@ public class ProductController {
 
 	@RequestMapping(value = "updateProduct", method = RequestMethod.POST)
 	public String updateProduct(@ModelAttribute("product") Product product, Model model, HttpSession session,
-			@RequestParam("prodNo") int prodNo) throws Exception {
+			@RequestParam("prodNo") int prodNo, @RequestParam("file") MultipartFile file) throws Exception {
 
 		System.out.println("/product/updateProduct : POST");
+
+		String fileName = file.getOriginalFilename();
+		File target = new File(uploadDir, fileName);
+
+		FileCopyUtils.copy(file.getBytes(), target);
+
+		product.setFileName(fileName);
 
 		productService.updateProduct(product);
 
