@@ -7,7 +7,7 @@
 
 <html>
 <head>
-<title>Insert title here</title>
+<title>구매 후 페이지</title>
 </head>
 
 <body>

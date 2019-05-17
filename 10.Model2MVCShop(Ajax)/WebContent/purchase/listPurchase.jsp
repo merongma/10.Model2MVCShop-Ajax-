@@ -122,6 +122,7 @@ $(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
 				<c:if test="${! empty purchase.tranCode && purchase.tranCode=='1  ' }">구매완료</c:if>
 				<c:if test="${! empty purchase.tranCode && purchase.tranCode=='2  '}">배송중</c:if>
 				<c:if test="${! empty purchase.tranCode && purchase.tranCode=='3  '}">배송완료</c:if>
+				<c:if test="${! empty purchase.tranCode && purchase.tranCode=='4  '}">주문취소</c:if>
 				상태 입니다.</td>
 		<td></td>
 		<td align="left" >

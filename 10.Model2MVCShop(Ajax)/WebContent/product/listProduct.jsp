@@ -185,7 +185,7 @@
 						<td></td>
 						<td align="left"><c:if test="${product.stock!=0 }">판매중</c:if>
 							<c:if
-								test="${product.stock==0 && (empty user ||  empty product.proTranCode)}">품절</c:if>
+								test="${product.stock==0 && (empty user ||  empty product.proTranCode || !empty user)}">품절</c:if>
 						</td>
 					</tr>
 					<tr>

@@ -185,13 +185,25 @@ public class PurchaseController {
 
 		System.out.println("/purchase/updateTranCodeByProd : GET");
 
+		System.out.println("sotck 확인 !!" + (productService.getProduct(prodNo)).getStock());
+		System.out.println("quantity 확인 !!" + (purchaseService.getPurchase2(prodNo)).getQuantity());
+		System.out.println("trancode 확인:" + tranCode);
+
 		product.setProdNo(prodNo);
 		purchase.setPurchaseProd(product);
-
+		purchase.setQuantity((purchaseService.getPurchase2(prodNo)).getQuantity());
 		purchase.setTranCode(tranCode);
 		System.out.println("1" + purchase);
 		purchaseService.updateTranCode(purchase);
+
+		if (tranCode.equals(4)) {
+			product.setStock((productService.getProduct(prodNo)).getStock()+(purchaseService.getPurchase2(prodNo)).getQuantity());
+			productService.updateStock(product);
+
+		}
+
 		System.out.println("2" + purchase);
+		System.out.println("2" + product);
 
 		return "forward:/purchase/shippingList?prodNo=" + prodNo;
 	}
@@ -215,8 +227,7 @@ public class PurchaseController {
 	}
 
 	@RequestMapping(value = "shippingList")
-	public String shippingList(@ModelAttribute("search") Search search, Model model)
-			throws Exception {
+	public String shippingList(@ModelAttribute("search") Search search, Model model) throws Exception {
 
 		System.out.println("/purchase/shippingList : GET / POST");
 
@@ -227,13 +238,13 @@ public class PurchaseController {
 
 		// Business logic 수행
 		Map<String, Object> map = purchaseService.getShippingList(search);
-		
-		System.out.println("map값 : "+map);
-		System.out.println("list값 : "+map.get("list"));
+
+		System.out.println("map값 : " + map);
+		System.out.println("list값 : " + map.get("list"));
 		List list = (List) map.get("list");
 
 		for (int i = 0; i < list.size(); i++) {
-			
+
 			Purchase purchase = (Purchase) list.get(i);
 			int prodNo = purchase.getPurchaseProd().getProdNo();
 			Product product = productService.getProduct(prodNo);

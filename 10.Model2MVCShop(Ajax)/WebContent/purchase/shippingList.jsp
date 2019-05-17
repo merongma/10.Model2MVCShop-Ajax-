@@ -29,6 +29,11 @@ function fncGetUserList(currentPage) {
 		//alert($("#prodNo").val());
 		self.location ="/purchase/updateTranCodeByProd?menu=manage&prodNo="+$("#prodNo").val()+"&tranCode=2";
 	});
+	
+	$( "h8:contains('주문취소')" ).on("click" , function() {
+		alert($("#prodNo").val());
+		self.location ="/purchase/updateTranCodeByProd?menu=manage&prodNo="+$("#prodNo").val()+"&tranCode=4";
+	});
 
 	$( ".ct_list_pop td:nth-child(3)" ).css("color" , "purple");
 	$("h7").css("color" , "purple");
@@ -112,6 +117,7 @@ function fncGetUserList(currentPage) {
 					<c:if test="${user.role=='admin' && param.menu=='manage'}">구매완료
 					<h8>배송하기</h8>
 					<input type="hidden" name="prodNo" id="prodNo"  value="${product.prodNo }" />
+					<h8>주문취소</h8>
 					</c:if>
 				</c:if>
 				
@@ -121,6 +127,10 @@ function fncGetUserList(currentPage) {
 				
 				<c:if test="${! empty product.proTranCode && product.proTranCode=='3  '}">
 					<c:if test="${user.role=='admin' && param.menu=='manage'}">배송완료</c:if>
+				</c:if>
+				
+				<c:if test="${! empty product.proTranCode && product.proTranCode=='4  '}">
+					<c:if test="${user.role=='admin' && param.menu=='manage'}">주문취소</c:if>
 				</c:if>
 			</td>	
 		</tr>
