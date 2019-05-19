@@ -197,9 +197,10 @@ public class PurchaseController {
 		purchaseService.updateTranCode(purchase);
 
 		if (tranCode.equals("4")) {
-			
+
 			System.out.println("여기 들어오나욤?");
-			product.setStock((productService.getProduct(prodNo)).getStock()+(purchaseService.getPurchase2(prodNo)).getQuantity());
+			product.setStock((productService.getProduct(prodNo)).getStock()
+					+ (purchaseService.getPurchase2(prodNo)).getQuantity());
 			productService.updateStock(product);
 
 		}
@@ -250,10 +251,10 @@ public class PurchaseController {
 			Purchase purchase = (Purchase) list.get(i);
 			int prodNo = purchase.getPurchaseProd().getProdNo();
 			Product product = productService.getProduct(prodNo);
-			purchase.setPurchaseProd(product);
 			product.setProTranCode(purchase.getTranCode());
+			purchase.setPurchaseProd(product);
 			list.set(i, purchase);
-			list.set(i, product);
+			// list.set(i, product);
 		}
 
 		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,

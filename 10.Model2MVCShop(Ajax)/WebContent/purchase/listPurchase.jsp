@@ -21,13 +21,46 @@ function fncGetUserList(currentPage) {
 }
 $(function() {
 	 
+	$( ".ct_list_pop td:nth-child(1)" ).on("click" , function() {
+		self.location ="/purchase/getPurchase?tranNo="+$(this).children("input").val();
+	});
 	
 	$( ".ct_list_pop td:nth-child(3)" ).on("click" , function() {
 			self.location ="/user/getUser?userId="+$(this).children("input").val();
 	});
 	
-	$( ".ct_list_pop td:nth-child(1)" ).on("click" , function() {
-		self.location ="/purchase/getPurchase?tranNo="+$(this).children("input").val();
+	$( ".ct_list_pop td:nth-child(5)" ).on("click" , function() {
+		var tranNo = $(this).children("input").val().trim();
+		$.ajax({
+			url : "/purchase/json/getPurchase/" + tranNo,
+			method : "GET",
+			dataType : "json",
+			headers : {
+				"Accept" : "application/json",
+				"Content-Type" : "application/json"
+			},
+			success : function(JSONData, status) {
+
+				//alert(status);
+				//alert("JSONData : \n"+JSONData.tranNo);
+
+				var displayValue = "<h3>" + 
+				"제품번호 : "+JSONData.purchaseProd.prodNo + "<br/>" +
+				"구매자 이름 : "+JSONData.purchaseProd.receiverName + "<br/>" +
+				"재고 : "+ JSONData.quantity + "<br/>" +
+				"구매자 연락처 : "+ JSONData.receiverPhone + "<br/>" +
+				"구매자 주소 : "+ JSONData.divyAddr + "<br/>" +
+				"구매 요청 사항: "+ JSONData.divyRequest + "<br/>" +
+				"배송희망일: "+ JSONData.divyDate + "<br/>" +
+				"주문일: "+ JSONData.orderDate + "<br/>" +
+				"상품이미지 : <img src=/images/uploadFiles/"+ JSONData.purchaseProd.fileName+ "/><br/>" 
+				"</h3>";
+
+				//alert(displayValue);
+				$("h3").remove();
+				$("#" + tranNo + "").html(displayValue);
+			}
+		});
 	});
 	
 	$(".ct_list_pop td:nth-child(11):contains('물건도착')" ).on("click",function() {
@@ -38,15 +71,11 @@ $(function() {
 	
 
 	
-$( ".ct_list_pop td:nth-child(1)" ).css("color" , "green");
-$( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
-$( ".ct_list_pop td:contains('물건도착')" ).css("color" , "blue");
-$( ".ct_list_pop td:nth-child(9)" ).css("color" , "red");
-
-$("h7:first").css("color" , "green");
-$("h7:last").css("color" , "red");
-
-
+$( ".ct_list_pop td:nth-child(1)" ).css("color" , "#5F04B4");
+$( ".ct_list_pop td:nth-child(3)" ).css("color" , "#4C0B5F");
+$( ".ct_list_pop td:nth-child(5)" ).css("color" , "#610B5E");
+$( ".ct_list_pop td:contains('물건도착')" ).css("color" , "#B4045F");
+//$( ".ct_list_pop td:nth-child(9)" ).css("color" , "red");
 		
 $(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
 
@@ -109,7 +138,7 @@ $(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
 		${purchase.buyer.userId}
 		</td>
 		<td></td>
-		<td align="left">${purchase.purchaseProd.prodName}</td>
+		<td align="left">${purchase.purchaseProd.prodName}<input type="hidden" name="tranNo"  value="${purchase.tranNo }" /></td>
 		<td></td>
 		<td align="left">
 		<c:if test="${purchase.quantity>=1 }">${(purchase.purchaseProd.price)*(purchase.quantity)}</c:if>
@@ -133,7 +162,7 @@ $(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
 		</td>
 	</tr>
 	<tr>
-		<td colspan="11" bgcolor="D6D7D6" height="1"></td>
+		<td id = "${purchase.tranNo }" colspan="11" bgcolor="D6D7D6" height="1"></td>
 	</tr>
 	</c:forEach>
 </table>	

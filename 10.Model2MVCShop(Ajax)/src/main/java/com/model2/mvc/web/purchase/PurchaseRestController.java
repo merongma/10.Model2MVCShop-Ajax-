@@ -54,5 +54,7 @@ public class PurchaseRestController {
 
 		return purchaseService.getPurchase(tranNo);
 	}
+	
+
 
 }

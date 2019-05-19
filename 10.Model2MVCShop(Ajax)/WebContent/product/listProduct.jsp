@@ -68,12 +68,10 @@
 									+ $("#prodNo").val() + "&tranCode=2";
 						});
 		
-		$(".ct_list_pop td:nth-child(3)").css("color", "green");
-		$(".ct_list_pop td:nth-child(1)").css("color", "blue")
-		$("h7").css("color", "green");
-		$("h8").css("color", "blue");
-
-		$(".ct_list_pop td:nth-child(9):contains('품절')").css("color", "red");
+		$(".ct_list_pop td:nth-child(3)").css("color", "#DF7401");
+		$(".ct_list_pop td:nth-child(1)").css("color", "#DBA901");
+		$("h8").css("color", "#FE642E");
+		$(".ct_list_pop td:nth-child(9):contains('품절')").css("color", "#FF0040");
 
 		$(".ct_list_pop:nth-child(4n+6)").css("background-color", "whitesmoke");
 
