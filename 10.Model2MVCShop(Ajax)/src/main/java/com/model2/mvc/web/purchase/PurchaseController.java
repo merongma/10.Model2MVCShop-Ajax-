@@ -196,7 +196,9 @@ public class PurchaseController {
 		System.out.println("1" + purchase);
 		purchaseService.updateTranCode(purchase);
 
-		if (tranCode.equals(4)) {
+		if (tranCode.equals("4")) {
+			
+			System.out.println("여기 들어오나욤?");
 			product.setStock((productService.getProduct(prodNo)).getStock()+(purchaseService.getPurchase2(prodNo)).getQuantity());
 			productService.updateStock(product);
 

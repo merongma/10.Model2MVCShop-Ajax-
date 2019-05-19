@@ -25,19 +25,18 @@ function fncGetUserList(currentPage) {
 	});
 	
 	
-	$( "h8:contains('배송하기')" ).on("click" , function() {
-		//alert($("#prodNo").val());
+	$( ".ct_list_pop td:nth-child(9):contains('배송하기')" ).on("click" , function() {
+		alert("배송하기 버튼 " +$(this).children("input").val());
 		self.location ="/purchase/updateTranCodeByProd?menu=manage&prodNo="+$("#prodNo").val()+"&tranCode=2";
 	});
 	
-	$( "h8:contains('주문취소')" ).on("click" , function() {
-		alert($("#prodNo").val());
+	$( ".ct_list_pop td:nth-child(11):contains('주문취소')"  ).on("click" , function() {
+		alert("주문취소 버튼 " +$(this).children("input").val());
 		self.location ="/purchase/updateTranCodeByProd?menu=manage&prodNo="+$("#prodNo").val()+"&tranCode=4";
 	});
 
 	$( ".ct_list_pop td:nth-child(3)" ).css("color" , "purple");
-	$("h7").css("color" , "purple");
-	$("h8").css("color" , "blue");
+  	$("h8").css("color" , "blue");
 	
 	$(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
 
@@ -93,6 +92,8 @@ function fncGetUserList(currentPage) {
 		<td class="ct_line02"></td>
 		<td class="ct_list_b">배송현황</td>
 		<td class="ct_line02"></td>
+		<td class="ct_list_b" width="100">주문취소</td>
+		<td class="ct_line02"></td>
 	</tr>
 	<tr>
 		<td colspan="11" bgcolor="808285" height="1"></td>
@@ -114,25 +115,28 @@ function fncGetUserList(currentPage) {
 			<td></td>
 			<td align="left">
 				<c:if test="${! empty product.proTranCode && product.proTranCode=='1  '}">
-					<c:if test="${user.role=='admin' && param.menu=='manage'}">구매완료
+					<c:if test="${user.role=='admin' && param.menu=='manage'}">구매완료 상태 입니다.
 					<h8>배송하기</h8>
-					<input type="hidden" name="prodNo" id="prodNo"  value="${product.prodNo }" />
-					<h8>주문취소</h8>
+					<input type="hidden" name="prodNo" value="${product.prodNo }" />
 					</c:if>
 				</c:if>
 				
 				<c:if test="${! empty product.proTranCode && product.proTranCode=='2  '}">
-					<c:if test="${user.role=='admin' && param.menu=='manage'}">배송중</c:if>
+					<c:if test="${user.role=='admin' && param.menu=='manage'}">배송중 상태 입니다.</c:if>
 				</c:if>
 				
 				<c:if test="${! empty product.proTranCode && product.proTranCode=='3  '}">
-					<c:if test="${user.role=='admin' && param.menu=='manage'}">배송완료</c:if>
+					<c:if test="${user.role=='admin' && param.menu=='manage'}">배송완료 상태 입니다.</c:if>
 				</c:if>
 				
 				<c:if test="${! empty product.proTranCode && product.proTranCode=='4  '}">
-					<c:if test="${user.role=='admin' && param.menu=='manage'}">주문취소</c:if>
+					<c:if test="${user.role=='admin' && param.menu=='manage'}">주문취소 상태 입니다.</c:if>
 				</c:if>
 			</td>	
+			<td></td>
+			<td align="left"><c:if test="${! empty product.proTranCode && product.proTranCode=='1  '}">
+			<h8>주문취소</h8><input type="hidden" name="prodNo" value="${product.prodNo }" /></c:if>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="11" bgcolor="D6D7D6" height="1"></td>
