@@ -59,6 +59,10 @@
 				$(window.parent.frames["rightFrame"].document.location).attr("href","/product/listProduct?menu=search");
 			});
 			
+			$( ".Depth03:contains('신상품')" ).on("click" , function() {
+				$(window.parent.frames["rightFrame"].document.location).attr("href","/product/listNew?menu=search");
+			});
+			
 			$( ".Depth03:contains('구매이력조회')" ).on("click" , function() {
 				$(window.parent.frames["rightFrame"].document.location).attr("href","/purchase/listPurchase");
 			});
@@ -146,6 +150,12 @@
 			<tr>
 				<td class="Depth03">
 					상품검색
+				</td>
+			</tr>
+			
+			<tr>
+				<td class="Depth03">
+					신상품
 				</td>
 			</tr>
 			

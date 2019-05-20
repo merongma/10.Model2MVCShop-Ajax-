@@ -156,8 +156,7 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "listProduct")
-	public String listProduct(@ModelAttribute("search") Search search, Model model, HttpServletRequest request)
-			throws Exception {
+	public String listProduct(@ModelAttribute("search") Search search, Model model) throws Exception {
 
 		System.out.println("/product/listProduct : GET / POST");
 
@@ -179,5 +178,30 @@ public class ProductController {
 		model.addAttribute("search", search);
 
 		return "forward:/product/listProduct.jsp";
+	}
+
+	@RequestMapping(value = "listNew")
+	public String listNew(@ModelAttribute("search") Search search, Model model) throws Exception {
+
+		System.out.println("/product/listNew : GET / POST");
+
+		if (search.getCurrentPage() == 0) {
+			search.setCurrentPage(1);
+		}
+		search.setPageSize(pageSize);
+
+		Map<String, Object> map = productService.getNewList(search);
+
+		Page resultPage = new Page(search.getCurrentPage(), ((Integer) map.get("totalCount")).intValue(), pageUnit,
+				pageSize);
+
+		System.out.println(resultPage);
+
+		// Model °ú View ¿¬°á
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("resultPage", resultPage);
+		model.addAttribute("search", search);
+
+		return "forward:/product/listNew.jsp";
 	}
 }

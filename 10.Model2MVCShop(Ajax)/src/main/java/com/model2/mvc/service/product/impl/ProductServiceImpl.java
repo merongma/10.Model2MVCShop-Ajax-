@@ -14,40 +14,41 @@ import com.model2.mvc.service.product.ProductService;
 import com.model2.mvc.service.product.ProductDao;
 
 @Service("productServiceImpl")
-public class ProductServiceImpl implements ProductService{
-	
-	///Field
+public class ProductServiceImpl implements ProductService {
+
+	/// Field
 	@Autowired
 	@Qualifier("productDaoImpl")
 	private ProductDao productDao;
-	public void setProductDao (ProductDao productDao) {
-		this.productDao= productDao;
+
+	public void setProductDao(ProductDao productDao) {
+		this.productDao = productDao;
 	}
-	
-	///Constructor
+
+	/// Constructor
 	public ProductServiceImpl() {
 		System.out.println(this.getClass());
 	}
-	///Method
+
+	/// Method
 	public void addProduct(Product product) throws Exception {
 		productDao.addProduct(product);
 	}
-
 
 	public Product getProduct(int prodNo) throws Exception {
 		return productDao.getProduct(prodNo);
 
 	}
 
-	public Map<String,Object> getProductList(Search search) throws Exception {
-	
-		List<Product> list= productDao.getProductList(search);
+	public Map<String, Object> getProductList(Search search) throws Exception {
+
+		List<Product> list = productDao.getProductList(search);
 		int totalCount = productDao.getTotalCount(search);
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", list );
+		map.put("list", list);
 		map.put("totalCount", new Integer(totalCount));
-		
+
 		return map;
 	}
 
@@ -58,7 +59,19 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public void updateStock(Product product) {
 		productDao.updateStock(product);
-		
+
+	}
+
+	@Override
+	public Map<String, Object> getNewList(Search search) throws Exception {
+		List<Product> list = productDao.getNewList(search);
+		int totalCount = productDao.getTotalCount(search);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("totalCount", new Integer(totalCount));
+
+		return map;
 	}
 
 }

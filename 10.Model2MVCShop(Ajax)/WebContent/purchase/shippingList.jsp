@@ -65,12 +65,12 @@ $(function() {
 	
 	$( ".ct_list_pop td:nth-child(9):contains('배송하기')" ).on("click" , function() {
 		alert("배송하기 버튼 " +$(this).children("input").val());
-		self.location ="/purchase/updateTranCodeByProd?menu=manage&prodNo="+$("#prodNo").val()+"&tranCode=2";
+		self.location ="/purchase/updateTranCodeByProd?menu=manage&prodNo="+$(this).children("input").val()+"&tranCode=2";
 	});
 
 	$( ".ct_list_pop td:nth-child(11):contains('주문취소')"  ).on("click" , function() {
 		alert("주문취소 버튼 " +$(this).children("input").val());
-		self.location ="/purchase/updateTranCodeByProd?menu=manage&prodNo="+$("#prodNo").val()+"&tranCode=4";
+		self.location ="/purchase/updateTranCodeByProd?menu=manage&prodNo="+$(this).children("input").val()+"&tranCode=4";
 	});
 	
 $( ".ct_list_pop td:nth-child(1)" ).css("color" , "#2E3B0B");
