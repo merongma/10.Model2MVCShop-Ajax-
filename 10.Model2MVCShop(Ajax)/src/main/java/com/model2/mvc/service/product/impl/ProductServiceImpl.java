@@ -65,7 +65,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Map<String, Object> getNewList(Search search) throws Exception {
 		List<Product> list = productDao.getNewList(search);
-		int totalCount = productDao.getTotalCount(search);
+		int totalCount = productDao.getTotalCount2(search);
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list);

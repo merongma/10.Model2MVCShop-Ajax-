@@ -17,6 +17,8 @@ public interface ProductDao {
 	public void updateProduct(Product product) throws Exception;
 
 	public int getTotalCount(Search search);
+	
+	public int getTotalCount2(Search search);
 
 	public void updateStock(Product product);
 

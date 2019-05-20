@@ -121,16 +121,20 @@
 	 </select>
 	 
 	 <select  id="getNewList"  parameterType="search"	resultMap="productSelectMap">
-	  	SELECT *
-	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT prod_no, prod_name, price, reg_date, manufacture_day, prod_detail, stock
-											FROM product 
-											<where>
-												SYSDATE -7 &lt; reg_date	 
-											</where>
-											ORDER BY prod_no ) inner_table
-						WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+		SELECT prod_no, prod_name, price, reg_date, manufacture_day, prod_detail, stock
+		FROM product 
+		<where>
+		SYSDATE -7 &lt; reg_date	 
+		</where>
+	 </select>
+	 
+	 	 <select  id="getTotalCount2"  parameterType="search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT prod_no, prod_name, price, reg_date, manufacture_day, prod_detail, stock
+						FROM product 
+							<where>
+							SYSDATE -7 &lt; reg_date	 
+							</where>) countTable						
 	 </select>
 	 
 </mapper>
